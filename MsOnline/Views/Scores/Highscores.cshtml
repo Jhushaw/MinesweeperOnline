@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MsOnline.Models.Score>
+
+@{
+    ViewBag.Title = "Highscores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Highscores</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.clicks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.clicks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+    </tr>
+}
+
+</table>

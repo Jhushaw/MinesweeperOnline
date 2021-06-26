@@ -1,0 +1,37 @@
+﻿@model List<MsOnline.Models.Score>
+
+@{
+    ViewBag.Title = "Scores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your High Scores</h2>
+
+
+<h4>Scores</h4>
+<hr />
+@foreach (var Score in Model)
+{
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Score.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Score.time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => Score.clicks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Score.clicks)
+        </dd>
+
+
+    </dl>
+    <hr />
+</div>
+}

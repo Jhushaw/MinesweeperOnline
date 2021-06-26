@@ -1,0 +1,53 @@
+﻿@model MsOnline.Models.Game
+
+@{
+    ViewBag.Title = "game";
+}
+<style>
+    img {
+        padding: 0px;
+        margin: auto;
+    }
+
+    button {
+        padding: 0px;
+        margin: auto;
+    }
+</style>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(document).contextmenu(function () {
+            return false;
+        });
+
+        $('.game-button').mousedown(function (event) {
+            if (event.which == 3) {
+                $.post("@Url.Action("FlagCell", "Game")", { cell: this.getAttribute("value") }, function (data) {
+                    $("#gameboard").html(data);
+
+                });
+            }
+        });
+    });
+</script>
+
+
+<h2>Minesweeper</h2>
+<p>the current time is @DateTime.Now</p>
+@using (Html.BeginForm("OnSave", "Game", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" name="save">Save Game</button>
+}
+<br />
+@using (Html.BeginForm("OnLoad", "Game"))
+{
+    <button type="submit" name="load">Load Game</button>
+}
+
+<div id="gameboard">
+    @Html.Partial("~/Views/Shared/__Game.cshtml", Model)
+</div>

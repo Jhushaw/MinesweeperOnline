@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "difficulty";
+}
+
+<h2>Select Difficulty</h2>
+
+
+@using (Html.BeginForm("Play", "Game", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">     
+        <div class="form-group">            
+            <input type="radio" id="easy" name="size" value="10">
+            <label for="easy">Easy</label><br>
+            <input type="radio" id="medium" name="size" value="15">
+            <label for="medium">Medium</label><br>
+            <input type="radio" id="hard" name="size" value="20">
+            <label for="hard">Hard</label> 
+            <br>
+            <input type="submit" value="Play" class="btn btn-default" />
+
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

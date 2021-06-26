@@ -1,0 +1,58 @@
+﻿@model MsOnline.Models.Game
+@{
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "gameboard"
+
+    };
+}
+
+    <script>
+
+    $(document).ready(function () {
+
+        $(document).contextmenu(function () {
+            return false;
+        });
+
+        $('.game-button').mousedown(function (event) {
+            if (event.which == 3) {
+                $.post("@Url.Action("FlagCell", "Game")", { cell: this.getAttribute("value") }, function (data) {
+                    $("#gameboard").html(data);
+
+                });
+            }
+        });
+    });
+    </script>
+
+@if (Model.condition != null)
+{
+    <h2>@Model.condition</h2>
+
+}
+
+@using (Ajax.BeginForm("Playgame", "Game", ajaxOptions))
+{
+<div class="board" id="Display">
+    <br>
+    <p>flags remaining: @Model.flags</p>
+    <br />
+    <p>timer: @Model.timer.Elapsed</p>
+    <br />
+    <p>clicks used: @Model.clicks</p>
+    @for (int h = 0; h < Model.bsize; h++)
+    {
+        for (int w = 0; w < Model.bsize; w++)
+        {
+            <button type="submit" class="game-button" name="cell" value="@h,@w">
+                <img src="@Model.game.getGridOfCells()[w,h].getImg()" />
+            </button>
+        }
+        <br />
+    }
+</div>
+
+}
